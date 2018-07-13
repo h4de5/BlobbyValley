@@ -11,7 +11,13 @@ config_version=3
 [application]
 
 config/name="BlobbyValley"
+run/main_scene="res://game/main/main.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=800
+window/dpi/allow_hidpi=true
 
 [rendering]
 
