@@ -1,7 +1,16 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://game/main/strand2.png" type="Texture" id=1]
-[ext_resource path="res://game/objects/ball01.png" type="Texture" id=2]
+[ext_resource path="res://game/objects/pole.png" type="Texture" id=2]
+[ext_resource path="res://game/objects/lighttexture.png" type="Texture" id=3]
+[ext_resource path="res://game/objects/ball01.png" type="Texture" id=4]
+
+[sub_resource type="OccluderPolygon2D" id=6]
+
+closed = true
+cull_mode = 0
+polygon = PoolVector2Array( 6.59473, -156.414, -0.115662, -160.563, -6.48578, -156.176, -6.43112, 162.626, 6.64935, 162.626 )
+_sections_unfolded = [ "Resource" ]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -29,20 +38,68 @@ height = 340.0
 custom_solver_bias = 0.0
 radius = 32.116
 
+[sub_resource type="OccluderPolygon2D" id=7]
+
+closed = true
+cull_mode = 0
+polygon = PoolVector2Array( 13.5638, -29.7336, 24.2404, -21.3217, 30.3876, -8.05684, 31.6817, 6.50218, 26.1816, 16.8553, 16.7992, 27.5319, 3.85782, 31.7378, -11.9953, 28.826, -24.2896, 20.0906, -30.4367, 9.41397, -31.0838, -6.43916, -26.5543, -17.4393, -17.8189, -26.8218, -9.40704, -31.6748, 2.24014, -31.9983 )
+
 [node name="world" type="Node2D" index="0"]
 
 [node name="background" type="Node2D" parent="." index="0"]
 
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="Sprite" type="Sprite" parent="background" index="0"]
+[node name="beach" type="Sprite" parent="background" index="0"]
 
-position = Vector2( 399.916, 298.311 )
+light_mask = 3
+position = Vector2( 400, 300.599 )
 texture = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="pole" type="Sprite" parent="background" index="1"]
+
+position = Vector2( 400, 439 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Offset", "Transform", "Visibility" ]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="background/pole" index="0"]
+
+show_behind_parent = true
+position = Vector2( 0, -1 )
+occluder = SubResource( 6 )
+light_mask = 1
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+
+[node name="sun" type="Light2D" parent="background" index="2"]
+
+position = Vector2( 52.3604, -99.7132 )
+enabled = true
+editor_only = false
+texture = ExtResource( 3 )
+offset = Vector2( 0, 0 )
+texture_scale = 7.0
+color = Color( 1, 1, 1, 1 )
+energy = 0.5
+mode = 0
+range_height = 0.0
+range_z_min = -1024
+range_z_max = 1024
+range_layer_min = 0
+range_layer_max = 0
+range_item_cull_mask = 1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 0 )
+shadow_buffer_size = 2048
+shadow_gradient_length = 0.0
+shadow_filter = 0
+shadow_filter_smooth = 0.0
+shadow_item_cull_mask = 2
+_sections_unfolded = [ "Material", "Range", "Shadow", "Visibility" ]
 
 [node name="field" type="StaticBody2D" parent="." index="1"]
 
+visible = false
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -72,7 +129,7 @@ _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
 [node name="pole" type="CollisionShape2D" parent="field" index="3"]
 
-position = Vector2( 400, 450 )
+position = Vector2( 400, 453 )
 shape = SubResource( 5 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
@@ -83,9 +140,9 @@ input_pickable = false
 collision_layer = 1
 collision_mask = 1
 mode = 0
-mass = 5.0
+mass = 10.0
 friction = 1.0
-bounce = 0.5
+bounce = 0.3
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
@@ -94,19 +151,27 @@ contact_monitor = false
 sleeping = false
 can_sleep = true
 linear_velocity = Vector2( 0, 0 )
-linear_damp = -1.0
+linear_damp = 0.0
 angular_velocity = 0.0
-angular_damp = 0.05
-_sections_unfolded = [ "Angular", "Applied Forces" ]
+angular_damp = 0.1
+_sections_unfolded = [ "Angular", "Linear", "Visibility" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ball" index="0"]
 
 shape = SubResource( 2 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="Sprite" type="Sprite" parent="ball" index="1"]
 
 position = Vector2( 0, -1 )
-texture = ExtResource( 2 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="ball/Sprite" index="0"]
+
+show_behind_parent = true
+occluder = SubResource( 7 )
+light_mask = 1
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
 
 
