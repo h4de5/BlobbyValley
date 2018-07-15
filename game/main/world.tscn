@@ -1,0 +1,254 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://game/main/strand2.png" type="Texture" id=1]
+[ext_resource path="res://game/objects/pole.png" type="Texture" id=2]
+[ext_resource path="res://game/objects/lighttexture.png" type="Texture" id=3]
+[ext_resource path="res://game/objects/ball01.png" type="Texture" id=4]
+[ext_resource path="res://game/player/0b.png" type="Texture" id=5]
+[ext_resource path="res://game/main/player.gd" type="Script" id=6]
+[ext_resource path="res://game/player/0r.png" type="Texture" id=7]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+
+closed = true
+cull_mode = 0
+polygon = PoolVector2Array( 6.59473, -156.414, -0.115662, -160.563, -6.48578, -156.176, -6.43112, 162.626, 6.64935, 162.626 )
+_sections_unfolded = [ "Resource" ]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 400, 5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 5, 500 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 5, 500 )
+
+[sub_resource type="CapsuleShape2D" id=5]
+
+custom_solver_bias = 0.0
+radius = 7.0
+height = 340.0
+
+[sub_resource type="CircleShape2D" id=6]
+
+custom_solver_bias = 0.0
+radius = 32.116
+
+[sub_resource type="OccluderPolygon2D" id=7]
+
+closed = true
+cull_mode = 0
+polygon = PoolVector2Array( 13.5638, -29.7336, 24.2404, -21.3217, 30.3876, -8.05684, 31.6817, 6.50218, 26.1816, 16.8553, 16.7992, 27.5319, 3.85782, 31.7378, -11.9953, 28.826, -24.2896, 20.0906, -30.4367, 9.41397, -31.0838, -6.43916, -26.5543, -17.4393, -17.8189, -26.8218, -9.40704, -31.6748, 2.24014, -31.9983 )
+
+[sub_resource type="CapsuleShape2D" id=8]
+
+custom_solver_bias = 0.0
+radius = 29.9584
+height = 31.722
+
+[node name="world" type="Node2D" index="0"]
+
+[node name="background" type="Node2D" parent="." index="0"]
+
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="beach" type="Sprite" parent="background" index="0"]
+
+light_mask = 3
+position = Vector2( 400, 300.599 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="pole" type="Sprite" parent="background" index="1"]
+
+editor/display_folded = true
+position = Vector2( 400, 439 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Offset", "Transform", "Visibility" ]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="background/pole" index="0"]
+
+show_behind_parent = true
+position = Vector2( 0, -1 )
+occluder = SubResource( 1 )
+light_mask = 1
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+
+[node name="sun" type="Light2D" parent="background" index="2"]
+
+position = Vector2( 6.11639, -102.541 )
+enabled = true
+editor_only = false
+texture = ExtResource( 3 )
+offset = Vector2( 0, 0 )
+texture_scale = 7.0
+color = Color( 1, 1, 1, 1 )
+energy = 0.5
+mode = 0
+range_height = 0.0
+range_z_min = -1024
+range_z_max = 1024
+range_layer_min = 0
+range_layer_max = 0
+range_item_cull_mask = 1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 0 )
+shadow_buffer_size = 2048
+shadow_gradient_length = 0.0
+shadow_filter = 0
+shadow_filter_smooth = 0.0
+shadow_item_cull_mask = 2
+_sections_unfolded = [ "Material", "Range", "Shadow", "Visibility" ]
+
+[node name="field" type="StaticBody2D" parent="." index="1"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Transform" ]
+
+[node name="floor" type="CollisionShape2D" parent="field" index="0"]
+
+position = Vector2( 400, 560 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="ceiling" type="CollisionShape2D" parent="field" index="1"]
+
+position = Vector2( 400, -400 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="left" type="CollisionShape2D" parent="field" index="2"]
+
+position = Vector2( 0, 100 )
+shape = SubResource( 3 )
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+
+[node name="right" type="CollisionShape2D" parent="field" index="3"]
+
+position = Vector2( 800, 100 )
+shape = SubResource( 4 )
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+
+[node name="pole" type="CollisionShape2D" parent="field" index="4"]
+
+position = Vector2( 400, 453 )
+shape = SubResource( 5 )
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+
+[node name="ball" type="RigidBody2D" parent="." index="2"]
+
+position = Vector2( 438.294, 211.588 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+mode = 0
+mass = 10.0
+friction = 1.0
+bounce = 0.8
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = 0.0
+angular_velocity = 0.0
+angular_damp = 0.1
+_sections_unfolded = [ "Angular", "Linear", "Visibility" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ball" index="0"]
+
+shape = SubResource( 6 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="Sprite" type="Sprite" parent="ball" index="1"]
+
+position = Vector2( 0, -1 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="ball/Sprite" index="0"]
+
+show_behind_parent = true
+occluder = SubResource( 7 )
+light_mask = 1
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+
+[node name="player-blue" type="RigidBody2D" parent="." index="3"]
+
+position = Vector2( 166.509, 474.346 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+mode = 2
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player-blue" index="0"]
+
+shape = SubResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="player-blue" index="1"]
+
+texture = ExtResource( 5 )
+
+[node name="player-red" type="RigidBody2D" parent="." index="4"]
+
+position = Vector2( 616.318, 474.346 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+mode = 2
+mass = 20.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 1
+contacts_reported = 4
+contact_monitor = true
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = 2.0
+angular_velocity = 0.0
+angular_damp = 1.0
+script = ExtResource( 6 )
+_sections_unfolded = [ "Angular", "Linear" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player-red" index="0"]
+
+shape = SubResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="player-red" index="1"]
+
+texture = ExtResource( 7 )
+
+
