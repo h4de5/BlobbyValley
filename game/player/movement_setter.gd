@@ -16,12 +16,8 @@ func initialize():
 
 	var parent
 	parent = get_node(scene.get_as_property_path())
+	print("scene set via editor: ", scene)
 	print("found path of parent: ", scene.get_as_property_path())
-
-	print("found weigth 1: ", get_node("../player-red").get("weight"))
-	print("found weigth 2: ", get_node(scene.get_as_property_path()).get("weight"))
-	#print("found weigth 3: ", scene.get("weight"))
-
 
 	for setting in settings:
 		#element.new()
