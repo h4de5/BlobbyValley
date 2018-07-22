@@ -25,9 +25,9 @@ func _process(delta):
 	left_over_motion = move_and_slide( v_movement + Vector2(0, gravity), Vector2( 0, 0 ), 5, 3, 0.785398 )
 
 	if get_slide_count() != 0 :
-	for i in range (0, get_slide_count()):
-		var collision = get_slide_collision(i)
-		print(collision)
+		for i in range (0, get_slide_count()):
+			var collision = get_slide_collision(i)
+			print(collision)
 
 
 
