@@ -2,8 +2,8 @@
 extends KinematicBody2D
 
 var v_movement = Vector2(0,0);
-var f_speed = 25
-var gravity = 10
+var f_speed = 425
+var gravity = 30
 
 func _ready():
 	pass
@@ -14,7 +14,7 @@ func _ready():
 #	pass
 
 # func _physics_process(delta):
-func _process(delta):
+func _physics_process(delta):
 	# see: https://godotengine.org/qa/11812/can-kinematicbody-move-not-block-on
 	var left_over_motion = Vector2(0,0)
 	#if(v_movement.x != 0 || v_movement.y != 0):
@@ -22,12 +22,12 @@ func _process(delta):
 
 		# apply_impulse(Vector2(0,0), v_movement)
 		# move_and_slide( Vector2 linear_velocity, Vector2 floor_normal=Vector2( 0, 0 ), float slope_stop_min_velocity=5, int max_bounces=4, float floor_max_angle=0.785398 )
-	left_over_motion = move_and_slide( v_movement + Vector2(0, gravity), Vector2( 0, 0 ), 5, 3, 0.785398 )
+	left_over_motion = move_and_slide( v_movement + Vector2(0, gravity), Vector2( 0, +-1 ), 5, 3, 0.785398)
 
 	if get_slide_count() != 0 :
 		for i in range (0, get_slide_count()):
 			var collision = get_slide_collision(i)
-			print(collision)
+			# print(collision)
 
 
 
