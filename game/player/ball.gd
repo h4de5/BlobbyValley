@@ -3,6 +3,9 @@ extends RigidBody2D
 
 var gravity = 1
 
+func _ready():
+	add_to_group("BALL")
+
 func _process(delta):
 	# move_and_slide(Vector2(0, gravity))
 	pass

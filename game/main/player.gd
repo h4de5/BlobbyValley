@@ -6,6 +6,7 @@ var f_speed = 425
 var gravity = 30
 
 func _ready():
+	add_collision_exception_with(get_node("hackydihack"))
 	pass
 
 #func _process(delta):
@@ -24,11 +25,19 @@ func _physics_process(delta):
 		# move_and_slide( Vector2 linear_velocity, Vector2 floor_normal=Vector2( 0, 0 ), float slope_stop_min_velocity=5, int max_bounces=4, float floor_max_angle=0.785398 )
 	# left_over_motion = move_and_slide( v_movement + Vector2(0, gravity), Vector2( 0, +-1 ), 5, 3, 0.785398)
 	left_over_motion = move_and_slide( v_movement + Vector2(0, gravity), Vector2(0,1), true)
+	#self.move_and_collide(v_movement + Vector2(0, gravity))
 
 	if get_slide_count() != 0 :
 		for i in range (0, get_slide_count()):
 			var collision = get_slide_collision(i)
-			# print(collision)
+			if(collision.collider.is_in_group("BALL")):
+				print("collision: ", collision.collider , " left_over_motion: ", left_over_motion)
+				#collision.collider.apply_impulse(Vector2(0,0), left_over_motion * 0.01)
+				collision.collider.apply_impulse(Vector2(0,0), collision.normal * -0.05)
+
+
+				# get_node("../ball").apply_impulse(
+
 
 
 

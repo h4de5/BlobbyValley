@@ -64,7 +64,6 @@ height = 28.4127
 
 [node name="background" type="Node2D" parent="." index="0"]
 
-editor/display_folded = true
 _sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="beach" type="Sprite" parent="background" index="0"]
@@ -91,7 +90,7 @@ _sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
 
 [node name="sun" type="Light2D" parent="background" index="2"]
 
-position = Vector2( 6.11639, -102.541 )
+position = Vector2( 6.11639, -102.101 )
 enabled = true
 editor_only = false
 texture = ExtResource( 3 )
@@ -159,28 +158,27 @@ _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
 [node name="ball" type="RigidBody2D" parent="." index="2"]
 
-editor/display_folded = true
 position = Vector2( 438.294, 211.588 )
-input_pickable = false
+input_pickable = true
 collision_layer = 1
 collision_mask = 1
 mode = 0
 mass = 0.00102041
 friction = 0.5
-bounce = 0.7
+bounce = 0.6
 gravity_scale = 3.0
 custom_integrator = false
-continuous_cd = 0
+continuous_cd = 2
 contacts_reported = 0
 contact_monitor = false
 sleeping = false
-can_sleep = false
+can_sleep = true
 linear_velocity = Vector2( 0, 0 )
 linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 4 )
-_sections_unfolded = [ "Angular", "Linear", "Visibility" ]
+_sections_unfolded = [ "Angular", "Applied Forces", "Collision", "Linear", "Pickable", "Transform", "Z Index" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ball" index="0"]
 
@@ -226,15 +224,17 @@ collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 7 )
-_sections_unfolded = [ "Angular", "Collision", "Linear", "Transform", "collision" ]
+_sections_unfolded = [ "Angular", "Collision", "Linear", "Pickable", "Transform", "Z Index", "collision" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player-red" index="0"]
 
 shape = SubResource( 9 )
+_sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
 
 [node name="Sprite" type="Sprite" parent="player-red" index="1"]
 
 texture = ExtResource( 8 )
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="movement_setter" parent="." index="5" instance=ExtResource( 9 )]
 
