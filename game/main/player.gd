@@ -33,7 +33,8 @@ func _physics_process(delta):
 			if(collision.collider.is_in_group("BALL")):
 				print("collision: ", collision.collider , " left_over_motion: ", left_over_motion)
 				#collision.collider.apply_impulse(Vector2(0,0), left_over_motion * 0.01)
-				collision.collider.apply_impulse(Vector2(0,0), collision.normal * -0.05)
+				# this is only necessary on godot < 3.1
+				#collision.collider.apply_impulse(Vector2(0,0), collision.normal * -0.05)
 
 
 				# get_node("../ball").apply_impulse(
@@ -45,11 +46,12 @@ func touches_ground():
 
 	# des not realy work that way
 	return true
-	var bodies = get_colliding_bodies()
-	if (get_parent().get_node("field/floor") in bodies):
-		return true
-	else:
-		return false
+
+	#var bodies = get_colliding_bodies()
+	#if (get_parent().get_node("field/floor") in bodies):
+	#	return true#
+	#else:
+	#	return false
 
 
 func _input(event):
