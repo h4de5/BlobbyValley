@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://game/player/movement_setter.gd" type="Script" id=1]
+
+[node name="movement_setter" type="Control"]
+margin_left = 300.0
+margin_top = 50.0
+margin_right = 500.0
+margin_bottom = 250.0
+script = ExtResource( 1 )
+scene = NodePath("../player-red")
+
+[node name="element_list" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="element_base" type="HBoxContainer" parent="element_list"]
+visible = false
+margin_right = 204.0
+margin_bottom = 20.0
+alignment = 1
+
+[node name="name" type="Label" parent="element_list/element_base"]
+margin_right = 100.0
+margin_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 100, 20 )
+text = "Text"
+align = 2
+valign = 1
+
+[node name="value" type="Label" parent="element_list/element_base"]
+margin_left = 104.0
+margin_right = 204.0
+margin_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 100, 20 )
+text = "Text"
+valign = 1

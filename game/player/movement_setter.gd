@@ -1,7 +1,7 @@
 extends Control
 
 export(NodePath) var scene
-export var settings = ['mass', 'linear_damp', 'gravity_scale', 'f_speed', 'gravity']
+export var settings = ['mass', 'linear_damp', 'gravity_scale', 'v_movement', 'gravity']
 
 var current_element_id = 0
 
