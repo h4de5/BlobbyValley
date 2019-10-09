@@ -96,10 +96,11 @@ shape = SubResource( 6 )
 [node name="ball" type="RigidBody2D" parent="."]
 position = Vector2( 438.294, 211.588 )
 input_pickable = true
-mass = 0.00102041
 physics_material_override = SubResource( 7 )
 gravity_scale = 3.0
 continuous_cd = 2
+contacts_reported = 5
+contact_monitor = true
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]

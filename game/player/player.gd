@@ -34,24 +34,34 @@ func _physics_process(delta):
 	# bool stop_on_slope=false, int max_slides=4, float floor_max_angle=0.785398, bool infinite_inertia=true
 	left_over_motion = move_and_slide( v_movement, Vector2(0,-1), false, 4, 0.785398, false)
 
+	if get_slide_count():
+		for i in range(0, get_slide_count()):
+			var collision = get_slide_collision(i)
+			if collision.collider.is_in_group("BALL"):
+				print("collided with ball")
+				var ball = collision.collider
+				ball.bounce(- collision.normal)
+#			elif ! collision.collider is StaticBody2D:
+#				print("collided with something else: ", collision.collider)
+#			elif collision.collider is StaticBody2D:
+##				print("collided with wall")
+#				pass
+			else:
+				print("collided with: ", collision.collider)
+
 	b_up +=  gravity
 
 	if(is_on_floor()):
-		print("is on floor")
+#		print("is on floor")
 		v_movement.y = 0
 	if(is_on_wall()):
-		print("is on wall")
+#		print("is on wall")
 		v_movement.x = 0
 
 	v_movement.x *= linear_damping
 
 	#self.move_and_collide(v_movement + Vector2(0, gravity))
 
-	if get_slide_count() != 0 :
-		for i in range (0, get_slide_count()):
-			var collision = get_slide_collision(i)
-			if(collision.collider.is_in_group("BALL")):
-				pass
 #				print("collision: ", collision.collider , " left_over_motion: ", left_over_motion)
 				#collision.collider.apply_impulse(Vector2(0,0), left_over_motion * 0.01)
 				# this is only necessary on godot < 3.1
