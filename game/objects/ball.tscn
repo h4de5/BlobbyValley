@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://game/player/ball.gd" type="Script" id=1]
+[ext_resource path="res://art/ball01.png" type="Texture" id=2]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.5
+bounce = 0.6
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 32.116
+
+[sub_resource type="OccluderPolygon2D" id=3]
+polygon = PoolVector2Array( 13.5638, -29.7336, 24.2404, -21.3217, 30.3876, -8.05684, 31.6817, 6.50218, 26.1816, 16.8553, 16.7992, 27.5319, 3.85782, 31.7378, -11.9953, 28.826, -24.2896, 20.0906, -30.4367, 9.41397, -31.0838, -6.43916, -26.5543, -17.4393, -17.8189, -26.8218, -9.40704, -31.6748, 2.24014, -31.9983 )
+
+[node name="ball" type="RigidBody2D"]
+position = Vector2( 438.294, 211.588 )
+input_pickable = true
+physics_material_override = SubResource( 1 )
+gravity_scale = 3.0
+continuous_cd = 2
+contacts_reported = 4
+contact_monitor = true
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -1 )
+texture = ExtResource( 2 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
+visible = false
+show_behind_parent = true
+occluder = SubResource( 3 )

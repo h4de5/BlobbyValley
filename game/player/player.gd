@@ -4,7 +4,7 @@ extends KinematicBody2D
 var v_movement = Vector2(0,0);
 var f_jump = 200
 var f_move = 200
-var gravity = 9.876542312
+var gravity = 9.81
 var linear_damping = 0.92
 
 var b_left = 0
@@ -38,7 +38,7 @@ func _physics_process(delta):
 		for i in range(0, get_slide_count()):
 			var collision = get_slide_collision(i)
 			if collision.collider.is_in_group("BALL"):
-				print("collided with ball")
+#				print("collided with ball")
 				var ball = collision.collider
 				ball.bounce(- collision.normal)
 #			elif ! collision.collider is StaticBody2D:
@@ -47,7 +47,8 @@ func _physics_process(delta):
 ##				print("collided with wall")
 #				pass
 			else:
-				print("collided with: ", collision.collider)
+#				print("collided with: ", collision.collider)
+				pass
 
 	b_up +=  gravity
 

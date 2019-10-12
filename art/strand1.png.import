@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/4r.png-c93991d72e765016a93f2a5af629674a.stex"
+path="res://.import/strand1.png-877c3bf7da435841d8c89bf1333b68c4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/player/4r.png"
-dest_files=[ "res://.import/4r.png-c93991d72e765016a93f2a5af629674a.stex" ]
+source_file="res://art/strand1.png"
+dest_files=[ "res://.import/strand1.png-877c3bf7da435841d8c89bf1333b68c4.stex" ]
 
 [params]
 

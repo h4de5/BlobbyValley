@@ -1,20 +1,19 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://game/main/strand2.png" type="Texture" id=1]
-[ext_resource path="res://game/objects/pole.png" type="Texture" id=2]
-[ext_resource path="res://game/objects/lighttexture.png" type="Texture" id=3]
-[ext_resource path="res://game/player/ball.gd" type="Script" id=4]
-[ext_resource path="res://game/objects/ball01.png" type="Texture" id=5]
-[ext_resource path="res://game/player/0b.png" type="Texture" id=6]
-[ext_resource path="res://game/player/player.gd" type="Script" id=7]
-[ext_resource path="res://game/player/0r.png" type="Texture" id=8]
-[ext_resource path="res://game/player/movement_setter.tscn" type="PackedScene" id=9]
+[ext_resource path="res://game/main/world.gd" type="Script" id=1]
+[ext_resource path="res://art/strand2.png" type="Texture" id=2]
+[ext_resource path="res://art/pole.png" type="Texture" id=3]
+[ext_resource path="res://art/lighttexture.png" type="Texture" id=4]
+[ext_resource path="res://game/objects/ball.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game/player/player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://art/0b.png" type="Texture" id=7]
+[ext_resource path="res://game/player/movement_setter.tscn" type="PackedScene" id=8]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 6.59473, -156.414, -0.115662, -160.563, -6.48578, -156.176, -6.43112, 162.626, 6.64935, 162.626 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 400, 40.2907 )
+extents = Vector2( 199.718, 40.2907 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 400, 5 )
@@ -29,52 +28,48 @@ extents = Vector2( 5, 500 )
 radius = 7.0
 height = 340.0
 
-[sub_resource type="PhysicsMaterial" id=7]
-friction = 0.5
-bounce = 0.6
-
-[sub_resource type="CircleShape2D" id=8]
-radius = 32.116
-
-[sub_resource type="OccluderPolygon2D" id=9]
-polygon = PoolVector2Array( 13.5638, -29.7336, 24.2404, -21.3217, 30.3876, -8.05684, 31.6817, 6.50218, 26.1816, 16.8553, 16.7992, 27.5319, 3.85782, 31.7378, -11.9953, 28.826, -24.2896, 20.0906, -30.4367, 9.41397, -31.0838, -6.43916, -26.5543, -17.4393, -17.8189, -26.8218, -9.40704, -31.6748, 2.24014, -31.9983 )
-
-[sub_resource type="CapsuleShape2D" id=10]
-radius = 29.9584
-height = 28.4127
-
 [node name="world" type="Node2D"]
+script = ExtResource( 1 )
 
 [node name="background" type="Node2D" parent="."]
 
 [node name="beach" type="Sprite" parent="background"]
 light_mask = 3
 position = Vector2( 400, 300.599 )
-texture = ExtResource( 1 )
-
-[node name="pole" type="Sprite" parent="background"]
-editor/display_folded = true
-position = Vector2( 400, 439 )
 texture = ExtResource( 2 )
 
+[node name="pole" type="Sprite" parent="background"]
+position = Vector2( 400, 439 )
+texture = ExtResource( 3 )
+
 [node name="LightOccluder2D" type="LightOccluder2D" parent="background/pole"]
+visible = false
 show_behind_parent = true
 position = Vector2( 0, -1 )
 occluder = SubResource( 1 )
 
 [node name="sun" type="Light2D" parent="background"]
+visible = false
 position = Vector2( 6.11639, -102.101 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 texture_scale = 7.0
 energy = 0.5
 shadow_enabled = true
-shadow_item_cull_mask = 2
+shadow_color = Color( 0.027451, 0.243137, 0.533333, 0 )
+shadow_item_cull_mask = 0
 
 [node name="field" type="StaticBody2D" parent="."]
-editor/display_folded = true
 
-[node name="floor" type="CollisionShape2D" parent="field"]
-position = Vector2( 400, 560 )
+[node name="field_left" type="StaticBody2D" parent="field"]
+
+[node name="floor_left" type="CollisionShape2D" parent="field/field_left"]
+position = Vector2( 200.781, 560.452 )
+shape = SubResource( 2 )
+
+[node name="field_right" type="StaticBody2D" parent="field"]
+
+[node name="floor_right" type="CollisionShape2D" parent="field/field_right"]
+position = Vector2( 596.781, 560.452 )
 shape = SubResource( 2 )
 
 [node name="ceiling" type="CollisionShape2D" parent="field"]
@@ -93,45 +88,23 @@ shape = SubResource( 5 )
 position = Vector2( 400, 453 )
 shape = SubResource( 6 )
 
-[node name="ball" type="RigidBody2D" parent="."]
-position = Vector2( 438.294, 211.588 )
-input_pickable = true
-physics_material_override = SubResource( 7 )
-gravity_scale = 3.0
-continuous_cd = 2
-contacts_reported = 5
-contact_monitor = true
-script = ExtResource( 4 )
+[node name="ball" parent="." instance=ExtResource( 5 )]
+position = Vector2( 593.824, 104.806 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]
-shape = SubResource( 8 )
-
-[node name="Sprite" type="Sprite" parent="ball"]
+[node name="player-blue" parent="." instance=ExtResource( 6 )]
 editor/display_folded = true
-position = Vector2( 0, -1 )
-texture = ExtResource( 5 )
+position = Vector2( 169.318, 474.346 )
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="ball/Sprite"]
-show_behind_parent = true
-occluder = SubResource( 9 )
+[node name="Sprite" parent="player-blue" index="1"]
+texture = ExtResource( 7 )
 
-[node name="player-blue" type="KinematicBody2D" parent="."]
-position = Vector2( 166.509, 474.346 )
+[node name="player-red" parent="." instance=ExtResource( 6 )]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player-blue"]
-shape = SubResource( 10 )
+[node name="movement_setter" parent="." instance=ExtResource( 8 )]
+visible = false
+margin_left = 300.598
+margin_top = 72.4397
+margin_right = 500.598
+margin_bottom = 272.44
 
-[node name="Sprite" type="Sprite" parent="player-blue"]
-texture = ExtResource( 6 )
-
-[node name="player-red" type="KinematicBody2D" parent="."]
-position = Vector2( 616.318, 474.346 )
-script = ExtResource( 7 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player-red"]
-shape = SubResource( 10 )
-
-[node name="Sprite" type="Sprite" parent="player-red"]
-texture = ExtResource( 8 )
-
-[node name="movement_setter" parent="." instance=ExtResource( 9 )]
+[editable path="player-blue"]

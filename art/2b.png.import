@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/lighttexture.png-1c379c3001d424f0c9de3e5246a5440b.stex"
+path="res://.import/2b.png-787809951d97ed8276e73c542a21add4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/objects/lighttexture.png"
-dest_files=[ "res://.import/lighttexture.png-1c379c3001d424f0c9de3e5246a5440b.stex" ]
+source_file="res://art/2b.png"
+dest_files=[ "res://.import/2b.png-787809951d97ed8276e73c542a21add4.stex" ]
 
 [params]
 

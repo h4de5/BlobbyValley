@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ball01.png-2b50c1748b83b7b9a9bd0324382364e7.stex"
+path="res://.import/4b.png-cdc5f330389174b1095403a741346ff3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/objects/ball01.png"
-dest_files=[ "res://.import/ball01.png-2b50c1748b83b7b9a9bd0324382364e7.stex" ]
+source_file="res://art/4b.png"
+dest_files=[ "res://.import/4b.png-cdc5f330389174b1095403a741346ff3.stex" ]
 
 [params]
 
